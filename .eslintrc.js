@@ -1,10 +1,14 @@
 module.exports = {
+  'root': true,
   env: {
     browser: true,
     es6: true,
     node: true
   },
   extends: [
+    "prettier",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended",
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
@@ -16,10 +20,10 @@ module.exports = {
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    project: "tsconfig.json",
+    project: "tsconfig.eslint.json",
     sourceType: "module"
   },
-  plugins: ["@typescript-eslint", "import"],
+  plugins: ["prettier", "@typescript-eslint", "import"],
   settings: {
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
@@ -29,6 +33,8 @@ module.exports = {
     }
   },
   rules: {
+    "spaced-comment": "error",
+    "prettier/prettier": "error",
     "@typescript-eslint/array-type": "error",
     "@typescript-eslint/consistent-type-assertions": "error",
     "@typescript-eslint/consistent-type-definitions": "error",
@@ -84,6 +90,5 @@ module.exports = {
     "quote-props": "off",
     radix: "error",
     "sort-imports": "warn",
-    "spaced-comment": "error",
   }
 };

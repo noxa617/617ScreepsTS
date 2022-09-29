@@ -1,4 +1,4 @@
-import { ErrorMapper } from "utils/ErrorMapper";
+import { ErrorMapper } from 'utils/ErrorMapper';
 
 declare global {
   /*
@@ -13,12 +13,6 @@ declare global {
   interface Memory {
     uuid: number;
     log: any;
-  }
-
-  interface CreepMemory {
-    role: string;
-    room: string;
-    working: boolean;
   }
 
   // Syntax for adding proprties to `global` (ex "global.log")

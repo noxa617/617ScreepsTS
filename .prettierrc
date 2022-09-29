@@ -3,9 +3,10 @@
   "proseWrap": "always",
   "semi": true,
   "tabWidth": 2,
-  "printWidth": 120,
+  "printWidth": 100,
   "singleQuote": true,
   "trailingComma": "none",
   "arrowParens": "avoid",
-  "endOfLine": "auto"
+  "endOfLine": "auto",
+  "useTabs": false
 }

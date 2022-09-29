@@ -1,16 +1,4 @@
 {
-    "[javascript]": {
-        "editor.formatOnSave": false
-    },
-    "[json]": {
-        "editor.formatOnSave": true
-    },
-    "[typescript]": {
-        "editor.formatOnSave": false
-    },
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
-    },
     "editor.formatOnSave": true,
     "editor.renderWhitespace": "boundary",
     "files.encoding": "utf8",
@@ -24,5 +12,16 @@
         "typings/**": true
     },
     "typescript.tsdk": "./node_modules/typescript/lib",
-    "eslint.enable": true
+    "[javascript]": {
+        "editor.formatOnSave": false
+    },
+    "[json]": {
+        "editor.formatOnSave": true
+    },
+    "[typescript]": {
+        "editor.formatOnSave": true
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    }
 }
