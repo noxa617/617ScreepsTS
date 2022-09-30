@@ -1,8 +1,8 @@
-import {assert} from "chai";
-import {loop} from "../../src/main";
-import {Game, Memory} from "./mock"
+import { assert } from 'chai';
+import { loop } from '../../src/main';
+import { Game, Memory } from './mock';
 
-describe("main", () => {
+describe('main', () => {
   before(() => {
     // runs before all test in this block
   });
@@ -15,19 +15,19 @@ describe("main", () => {
     global.Memory = _.clone(Memory);
   });
 
-  it("should export a loop function", () => {
-    assert.isTrue(typeof loop === "function");
+  it('should export a loop function', () => {
+    assert.isTrue(typeof loop === 'function');
   });
 
-  it("should return void when called with no context", () => {
+  it('should return void when called with no context', () => {
     assert.isUndefined(loop());
   });
 
-  it("Automatically delete memory of missing creeps", () => {
-    Memory.creeps.persistValue = "any value";
-    Memory.creeps.notPersistValue = "any value";
+  it('Automatically delete memory of missing creeps', () => {
+    Memory.creeps.persistValue = 'any value';
+    Memory.creeps.notPersistValue = 'any value';
 
-    Game.creeps.persistValue = "any value";
+    Game.creeps.persistValue = 'any value';
 
     loop();
 
