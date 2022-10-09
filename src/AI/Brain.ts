@@ -10,6 +10,6 @@ export class Brain {
   }
 
   private getSources(): Source[] {
-    return Game.rooms.W5N8.find(FIND_SOURCES);
+    return Game.rooms.E56N18.find(FIND_SOURCES);
   }
 }

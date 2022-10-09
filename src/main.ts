@@ -1,6 +1,7 @@
 import * as Helper from 'Helpers/CreepData';
 import { Brain } from 'AI/Brain';
 import { ErrorMapper } from 'utils/ErrorMapper';
+import roleHarvester from 'Roles/Harvester';
 
 declare global {
   interface memory {
@@ -43,7 +44,7 @@ export const loop = ErrorMapper.wrapLoop(() => {
   }
   for (const name in Game.creeps) {
     const creep = Game.creeps[name];
-    if (creep.memory.role === 'harvester') {
+    if (creep.memory.role === Helper.Roles.Harvester) {
       roleHarvester.run(creep);
     }
   }

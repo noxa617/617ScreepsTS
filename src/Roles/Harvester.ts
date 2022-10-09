@@ -3,7 +3,7 @@ const states = { Harvesting: 'Harvesting', Depositing: 'Depositing', Idle: 'Idle
 
 const roleHarvester = {
   /** @param {Creep} creep **/
-  run(creep: Creep) {
+  run(creep: Creep): void {
     const source = Game.getObjectById(creep.memory.sourceID);
     if (source != null) {
       if (creep.harvest(source) === ERR_NOT_IN_RANGE && creep.store.getFreeCapacity() > 0) {
@@ -36,4 +36,4 @@ const roleHarvester = {
   }
 };
 
-module.exports = roleHarvester;
+export default roleHarvester;
