@@ -8,7 +8,7 @@ const roleHarvester = {
     if (source != null) {
       if (creep.harvest(source) === ERR_NOT_IN_RANGE && creep.store.getFreeCapacity() > 0) {
         creep.moveTo(source);
-        creep.memory.state = 'Harvesting';
+        creep.memory.state = states.Harvesting;
       } else if (!(creep.store.getFreeCapacity() > 0) || !(source.energy > 0)) {
         const targets = creep.room.find(FIND_STRUCTURES, {
           filter: Structure => {
