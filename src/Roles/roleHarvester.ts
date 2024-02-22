@@ -1,8 +1,9 @@
 import { States } from 'Helpers/CreepData';
+
 const roleHarvester = {
   run(creep: Creep): void {
     if (creep.store.getFreeCapacity() > 0) {
-      const sources = creep.room.find(FIND_SOURCES);
+      const sources = creep.room.find(FIND_SOURCES_ACTIVE);
       if (creep.harvest(sources[0]) === ERR_NOT_IN_RANGE) {
         creep.moveTo(sources[0]);
         creep.memory.state = States.Harvesting;
