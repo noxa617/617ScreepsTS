@@ -1,12 +1,14 @@
 import { ErrorMapper } from 'utils/ErrorMapper';
 import { States } from 'Helpers/CreepData';
+import { buildingswitcher } from 'Helpers/WorldData';
 import roleBuilder from 'Roles/roleBuilder';
 import roleHarvester from 'Roles/roleHarvester';
+import roleHauler from 'Roles/roleHauler';
 import roleUpgrader from 'Roles/roleUpgrader';
-import { each } from 'lodash';
 
-const NUM_BUILDER = 1;
+const NUM_BUILDER = 3;
 const NUM_UPGRADER = 3;
+const NUM_HAULER = 4;
 // var NUM_MOVER = 1;
 // var NUM_REPAIRER = 1;
 // var NUM_SCOUTS = 1;
@@ -36,7 +38,7 @@ export const loop = ErrorMapper.wrapLoop(() => {
   }
 
   const sources: Source[] = Game.spawns.Spawn1.room.find(FIND_SOURCES);
-  const NUM_HARVESTER = sources.length;
+  const NUM_HARVESTER = 2; // sources.length;
 
   const builders = _.filter(Game.creeps, creep => creep.memory.role === 'builder');
   console.log('Builders: ' + builders.length.toString());
@@ -44,14 +46,22 @@ export const loop = ErrorMapper.wrapLoop(() => {
   const harvesters = _.filter(Game.creeps, creep => creep.memory.role === 'harvester');
   console.log('Harvesters: ' + harvesters.length.toString());
 
+  const haulers = _.filter(Game.creeps, creep => creep.memory.role === 'hauler');
+  console.log('Haulers: ' + haulers.length.toString());
+
   const upgraders = _.filter(Game.creeps, creep => creep.memory.role === 'upgrader');
   console.log('Upgraders: ' + upgraders.length.toString());
 
   if (harvesters.length < NUM_HARVESTER) {
     const newName = 'Harvester' + Game.time.toString();
     console.log('Spawning new harvester: ' + newName);
-    Game.spawns.Spawn1.spawnCreep([WORK, CARRY, MOVE], newName, {
+    Game.spawns.Spawn1.spawnCreep([WORK, WORK, MOVE], newName, {
       memory: { role: 'harvester', state: States.Idle }
+    });
+  } else if (haulers.length < NUM_HAULER) {
+    const newName = 'Hauler' + Game.time.toString();
+    Game.spawns.Spawn1.spawnCreep([CARRY, CARRY, MOVE, MOVE], newName, {
+      memory: { role: 'hauler', state: States.Idle }
     });
   } else if (upgraders.length < NUM_UPGRADER) {
     const newName = 'Upgrader' + Game.time.toString();
@@ -72,11 +82,22 @@ export const loop = ErrorMapper.wrapLoop(() => {
     if (creep.memory.role === 'harvester') {
       roleHarvester.run(creep);
     }
+    if (creep.memory.role === 'hauler') {
+      roleHauler.run(creep);
+    }
     if (creep.memory.role === 'upgrader') {
       roleUpgrader.run(creep);
     }
     if (creep.memory.role === 'builder') {
       roleBuilder.run(creep);
+    }
+  }
+
+  for (const room in Game.rooms) {
+    const roomLevel = Game.rooms[room].controller?.level;
+    const currentRoom = Game.rooms[room];
+    if (roomLevel) {
+      buildingswitcher(roomLevel, currentRoom);
     }
   }
 });
